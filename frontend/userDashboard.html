@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Dashboard - AtlasAccess</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+      <h2>User Dashboard</h2>
+
+        <button onclick="loadProfile()">Load Profile</button>
+          <pre id="profile"></pre>
+
+            <script>
+                const token = localStorage.getItem("token");
+
+                    function loadProfile() {
+                          fetch("http://localhost:3000/users/profile", {
+                                  headers: { Authorization: token }
+                                        })
+                                              .then(res => res.json())
+                                                    .then(data => {
+                                                            document.getElementById("profile").innerText =
+                                                                      JSON.stringify(data, null, 2);
+                                                                            });
+                                                                                }
+                                                                                  </script>
+                                                                                  </body>
+                                                                                  </html>

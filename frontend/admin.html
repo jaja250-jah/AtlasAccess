@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard - AtlasAccess</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+      <h2>Admin Dashboard</h2>
+
+        <button onclick="loadDashboard()">Load Stats</button>
+          <div id="stats"></div>
+
+            <button onclick="loadUsers()">Load Users</button>
+              <div id="users"></div>
+
+                <script>
+                    const token = localStorage.getItem("token");
+
+                        function loadDashboard() {
+                              fetch("http://localhost:3000/admin/dashboard", {
+                                      headers: { Authorization: token }
+                                            })
+                                                  .then(res => res.json())
+                                                        .then(data => {
+                                                                document.getElementById("stats").innerText =
+                                                                          "Total Users: " + data.total_users;
+                                                                                });
+                                                                                    }
+
+                                                                                        function loadUsers() {
+                                                                                              fetch("http://localhost:3000/admin/users", {
+                                                                                                      headers: { Authorization: token }
+                                                                                                            })
+                                                                                                                  .then(res => res.json())
+                                                                                                                        .then(data => {
+                                                                                                                                document.getElementById("users").innerText =
+                                                                                                                                          JSON.stringify(data, null, 2);
+                                                                                                                                                });
+                                                                                                                                                    }
+                                                                                                                                                      </script>
+                                                                                                                                                      </body>
+                                                                                                                                                      </html>
